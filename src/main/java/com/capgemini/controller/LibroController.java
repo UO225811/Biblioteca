@@ -27,7 +27,7 @@ public class LibroController {
 	}
 
 	@PostMapping("/save")
-	public String saveBook(@ModelAttribute("book") Libro libro) {
+	public String saveBook(@ModelAttribute("libro") Libro libro) {
 		libroService.saveBook(libro);
 		return "redirect:/";
 	}
@@ -41,14 +41,14 @@ public class LibroController {
 	@GetMapping("/update/{id}")
 	public String showFormForUpdating(@PathVariable(value="id") long id, Model model) {
 		Libro libro = this.libroService.getBookById(id);
-		model.addAttribute("book", libro);
+		model.addAttribute("libro", libro);
 		return "actualizar_libro";
 	}
 
 	@GetMapping("/add")
 	public String showNewBookForm(Model model) {
 		Libro libro = new Libro();
-		model.addAttribute("book", libro);
+		model.addAttribute("libro", libro);
 		return "nuevo_libro";
 	}
 
