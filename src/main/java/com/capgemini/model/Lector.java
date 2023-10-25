@@ -1,12 +1,16 @@
 package com.capgemini.model;
 
 import java.time.LocalDate;
+import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,6 +27,12 @@ public class Lector {
 	private String telefono;
 	@Column
 	private String direccion;
+	
+	@OneToMany(mappedBy="lector", targetEntity=Prestamo.class, cascade=CascadeType.ALL)
+	private Set<Prestamo> prestamos;
+	
+	@OneToOne(mappedBy="lector",targetEntity=Multa.class, cascade=CascadeType.ALL)
+	private Multa multa;
 	
 	
 	public boolean devolver(Long id, LocalDate fechaAct) {
