@@ -15,6 +15,6 @@ public interface CopiaService {
 
 	void deleteCopyById(long id);
 	
-	getNumberOfAvailableCopiesByTitle()
+	int getNumberOfAvailableCopiesByTitle();
 
 }
