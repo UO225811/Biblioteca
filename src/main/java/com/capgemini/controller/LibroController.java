@@ -23,7 +23,7 @@ public class LibroController {
 
 	@GetMapping("/")
 	public String viewHomePage(Model model) {
-		return findPaginated(1, "nombreLibro", "asc", model);
+		return findPaginated(1, "titulo", "asc", model);
 	}
 
 	@PostMapping("/save")

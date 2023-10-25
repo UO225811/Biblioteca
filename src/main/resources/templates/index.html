@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head"></head>
+
+<body>
+	<h3>Listado de libros</h3>
+	<a class="btn btn-primary btn-sm mb-3" th:href="@{/add}">
+		Agregar un libro
+	</a>
+	<section>
+		<div class="container">
+			<table class="table table-striped table-responsive-md">
+				<thead>
+					<tr>
+						<th><a
+								th:href="@{'/page/' + ${currentPage} + '?sortField=titulo&sortOrder=' + ${reverseSortDir}}">Título</a>
+						</th>
+						<th><a
+								th:href="@{'/page/' + ${currentPage} + '?sortField=tipo&sortOrder=' + ${reverseSortDir}}">Tipo</a>
+						</th>
+						<th><a
+								th:href="@{'/page/' + ${currentPage} + '?sortField=editorial&sortOrder=' + ${reverseSortDir}}">Editorial</a>
+						</th>
+						<th><a
+								th:href="@{'/page/' + ${currentPage} + '?sortField=anyo&sortOrder=' + ${reverseSortDir}}">Año</a>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="book:${books}">
+						<td th:text="${book.titulo}"></td>
+						<td th:text="${book.tipo}"></td>
+						<td th:text="${book.editorial}"></td>
+						<td th:text="${book.anyo}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<!--Botonera para moverme en las páginas-->
+			<div th:replace="fragments/pagination" />
+		</div>
+		</div>
+	</section>
+</body>
+
+</htmll>
