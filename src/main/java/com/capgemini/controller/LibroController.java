@@ -27,13 +27,13 @@ public class LibroController {
 	}
 
 	@PostMapping("/save")
-	public String saveCourse(@ModelAttribute("course") Libro libro) {
+	public String saveBook(@ModelAttribute("book") Libro libro) {
 		libroService.saveBook(libro);
 		return "redirect:/";
 	}
 
 	@GetMapping("/delete/{id}")
-	public String deleteCourse(@PathVariable(value="id") long id) {
+	public String deleteBook(@PathVariable(value="id") long id) {
 		this.libroService.deleteBookById(id);
 		return "redirect:/";
 	}
@@ -41,15 +41,15 @@ public class LibroController {
 	@GetMapping("/update/{id}")
 	public String showFormForUpdating(@PathVariable(value="id") long id, Model model) {
 		Libro libro = this.libroService.getBookById(id);
-		model.addAttribute("course", libro);
-		return "actualizar_Libro";
+		model.addAttribute("book", libro);
+		return "actualizar_libro";
 	}
 
 	@GetMapping("/add")
-	public String showNewCourseForm(Model model) {
+	public String showNewBookForm(Model model) {
 		Libro libro = new Libro();
-		model.addAttribute("course", libro);
-		return "nuevo_Libro";
+		model.addAttribute("book", libro);
+		return "nuevo_libro";
 	}
 
 	@GetMapping("/page/{pageNumber}")

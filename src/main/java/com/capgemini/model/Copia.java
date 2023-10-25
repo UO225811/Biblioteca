@@ -1,6 +1,9 @@
 package com.capgemini.model;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,5 +24,11 @@ public class Copia {
 	private Long id;
 	@Column
 	private EstadoCopia estado;
+	@Embedded
+	@AttributeOverrides({
+		@AttributeOverride(name="inicio", column=@Column(name="fecha_inicio")),
+		@AttributeOverride(name="fin", column=@Column(name="fecha_fin")),
+	})
+	private Prestamo prestamo;
 	
 }
