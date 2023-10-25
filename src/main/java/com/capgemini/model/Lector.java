@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -28,10 +29,12 @@ public class Lector {
 	@Column
 	private String direccion;
 	
+	
 	@OneToMany(mappedBy="lector", targetEntity=Prestamo.class, cascade=CascadeType.ALL)
 	private Set<Prestamo> prestamos;
 	
-	@OneToOne(mappedBy="lector",targetEntity=Multa.class, cascade=CascadeType.ALL)
+	@OneToOne(optional=true)
+    @JoinColumn(name="multa")
 	private Multa multa;
 	
 	
