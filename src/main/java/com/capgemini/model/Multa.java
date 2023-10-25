@@ -19,4 +19,28 @@ public class Multa {
 	
 	@OneToOne(mappedBy="multa",targetEntity=Lector.class, cascade=CascadeType.ALL)
 	private Lector lector;
+
+	public LocalDate getfInicio() {
+		return fInicio;
+	}
+
+	public void setfInicio(LocalDate fInicio) {
+		this.fInicio = fInicio;
+	}
+
+	public LocalDate getfFin() {
+		return fFin;
+	}
+
+	public void setfFin(LocalDate fFin) {
+		this.fFin = fFin;
+	}
+
+	public Lector getLector() {
+		return lector;
+	}
+
+	public void setLector(Lector lector) {
+		this.lector = lector;
+	}
 }

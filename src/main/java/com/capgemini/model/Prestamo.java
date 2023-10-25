@@ -16,4 +16,28 @@ public class Prestamo {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="fk_lector")
 	private Lector lector;
+
+	public LocalDate getInicio() {
+		return inicio;
+	}
+
+	public void setInicio(LocalDate inicio) {
+		this.inicio = inicio;
+	}
+
+	public LocalDate getFin() {
+		return fin;
+	}
+
+	public void setFin(LocalDate fin) {
+		this.fin = fin;
+	}
+
+	public Lector getLector() {
+		return lector;
+	}
+
+	public void setLector(Lector lector) {
+		this.lector = lector;
+	}
 }

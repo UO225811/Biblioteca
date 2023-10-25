@@ -38,5 +38,37 @@ public class Copia {
 		@AttributeOverride(name="fin", column=@Column(name="fecha_fin")),
 	})
 	private Prestamo prestamo;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public EstadoCopia getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoCopia estado) {
+		this.estado = estado;
+	}
+
+	public Libro getLibro() {
+		return libro;
+	}
+
+	public void setLibro(Libro libro) {
+		this.libro = libro;
+	}
+
+	public Prestamo getPrestamo() {
+		return prestamo;
+	}
+
+	public void setPrestamo(Prestamo prestamo) {
+		this.prestamo = prestamo;
+	}
 	
 }

@@ -41,4 +41,60 @@ public class Libro {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="fk_autor")
 	private Autor autor;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public TipoLibro getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoLibro tipo) {
+		this.tipo = tipo;
+	}
+
+	public String getEditorial() {
+		return editorial;
+	}
+
+	public void setEditorial(String editorial) {
+		this.editorial = editorial;
+	}
+
+	public int getAnyo() {
+		return anyo;
+	}
+
+	public void setAnyo(int anyo) {
+		this.anyo = anyo;
+	}
+
+	public Set<Copia> getCopias() {
+		return copias;
+	}
+
+	public void setCopias(Set<Copia> copias) {
+		this.copias = copias;
+	}
+
+	public Autor getAutor() {
+		return autor;
+	}
+
+	public void setAutor(Autor autor) {
+		this.autor = autor;
+	}
 }
