@@ -28,6 +28,8 @@
 						<th><a
 								th:href="@{'/page/' + ${currentPage} + '?sortField=anyo&sortOrder=' + ${reverseSortDir}}">Año</a>
 						</th>
+						<th>Copias
+						</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -37,6 +39,7 @@
 						<td th:text="${book.autor.nombre}"></td>
 						<td th:text="${book.editorial}"></td>
 						<td th:text="${book.anyo}"></td>
+						<td th:text="${book.ncopias}"></td>
 					</tr>
 				</tbody>
 			</table>

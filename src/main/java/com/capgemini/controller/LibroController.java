@@ -1,5 +1,6 @@
 package com.capgemini.controller;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -38,9 +39,12 @@ public class LibroController {
 	}
 
 	@PostMapping("/save")
-	public String saveBook(@ModelAttribute("libro") Libro libro, @ModelAttribute int numCopias) {
+	public String saveBook(@ModelAttribute("libro") Libro libro, @RequestParam("numCopias") int numCopias) {
 		Autor autor = autorService.getAuthorById(libro.getAutor().getId());
-		libro.setAutor(autor);
+		libro.setAutor(autor);		
+		
+		libroService.saveBook(libro);
+		
 		
 		for (int i=0; i<numCopias; i++) {
 			Copia c = new Copia();
@@ -49,10 +53,6 @@ public class LibroController {
 			copiaService.saveCopy(c);
 		}
 		
-		List<Copia> copias = copiaService.findCopiasByLibroId(libro.getId());
-		//libro.setCopias(copias);
-		
-		libroService.saveBook(libro);
 		return "redirect:/";
 	}
 

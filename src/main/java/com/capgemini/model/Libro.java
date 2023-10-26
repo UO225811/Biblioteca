@@ -96,4 +96,8 @@ public class Libro {
 	public void setAutor(Autor autor) {
 		this.autor = autor;
 	}
+	
+	public int getNcopias() {
+		return copias.size();
+	}
 }
