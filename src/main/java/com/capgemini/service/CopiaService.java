@@ -1,6 +1,7 @@
 package com.capgemini.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.capgemini.model.Copia;
 
@@ -13,6 +14,8 @@ public interface CopiaService {
 
 	void deleteCopyById(long id);
 	
-	int getNumberOfAvailableCopiesByTitle();
+	int getNumberOfAvailableCopiesById();
+	
+	Set<Copia> findCopiasByLibroId(long libroId);
 
 }

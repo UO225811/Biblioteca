@@ -1,6 +1,7 @@
 package com.capgemini.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,8 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.capgemini.model.Autor;
+import com.capgemini.model.Copia;
 import com.capgemini.model.Libro;
+import com.capgemini.model.enums.EstadoCopia;
 import com.capgemini.service.AutorService;
+import com.capgemini.service.CopiaService;
 import com.capgemini.service.LibroService;
 
 @Controller
@@ -24,6 +28,8 @@ public class LibroController {
 	private LibroService libroService;
 	@Autowired
 	private AutorService autorService;
+	@Autowired
+	private CopiaService copiaService;
 
 
 	@GetMapping("/")
@@ -32,9 +38,20 @@ public class LibroController {
 	}
 
 	@PostMapping("/save")
-	public String saveBook(@ModelAttribute("libro") Libro libro) {
+	public String saveBook(@ModelAttribute("libro") Libro libro, @ModelAttribute int numCopias) {
 		Autor autor = autorService.getAuthorById(libro.getAutor().getId());
 		libro.setAutor(autor);
+		
+		for (int i=0; i<numCopias; i++) {
+			Copia c = new Copia();
+			c.setEstado(EstadoCopia.BIBLIOTECA);
+			c.setLibro(libro);
+			copiaService.saveCopy(c);
+		}
+		
+		Set<Copia> copias = copiaService.findCopiasByLibroId(libro.getId());
+		libro.setCopias(copias);
+		
 		libroService.saveBook(libro);
 		return "redirect:/";
 	}

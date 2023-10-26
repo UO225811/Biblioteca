@@ -2,6 +2,8 @@ package com.capgemini.model;
 
 import java.util.Set;
 
+import com.capgemini.model.enums.TipoLibro;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,9 +16,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-enum TipoLibro {
-	NOVELA, TEATRO, POESIA, ENSAYO
-}
 
 @Entity
 @Table(name="libros")

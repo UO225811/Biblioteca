@@ -1,5 +1,7 @@
 package com.capgemini.repository;
 
+import java.util.Set;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,7 +13,7 @@ public interface CopiaRepository extends JpaRepository<Copia, Long> {
 	@Query("SELECT count(*) from copias where fk_libro= :libroid")
 	int getNumCopiasByLibroId(@Param("libroid") long libroId);
 
-	@Query("INSERT INTO copias(estado,fk_libro) values(3,:libroid)")
-	int createCopiasByLibroId(@Param("libroid") long libroId, int numCopias);
-	
+	@Query("SELECT * FROM copias WHERE fk_libro= :libroid")
+	Set<Copia> findCopiasByLibroId(@Param("libroid") long libroId);
+
 }
