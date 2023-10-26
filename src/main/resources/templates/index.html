@@ -20,6 +20,9 @@
 								th:href="@{'/page/' + ${currentPage} + '?sortField=tipo&sortOrder=' + ${reverseSortDir}}">Tipo</a>
 						</th>
 						<th><a
+								th:href="@{'/page/' + ${currentPage} + '?sortField=autor.nombre&sortOrder=' + ${reverseSortDir}}">Autor</a>
+						</th>
+						<th><a
 								th:href="@{'/page/' + ${currentPage} + '?sortField=editorial&sortOrder=' + ${reverseSortDir}}">Editorial</a>
 						</th>
 						<th><a
@@ -31,6 +34,7 @@
 					<tr th:each="book:${books}">
 						<td th:text="${book.titulo}"></td>
 						<td th:text="${book.tipo}"></td>
+						<td th:text="${book.autor.nombre}"></td>
 						<td th:text="${book.editorial}"></td>
 						<td th:text="${book.anyo}"></td>
 					</tr>
