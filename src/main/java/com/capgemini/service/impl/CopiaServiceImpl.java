@@ -1,7 +1,6 @@
 package com.capgemini.service.impl;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,7 +46,7 @@ public class CopiaServiceImpl implements CopiaService{
 	}
 
 	@Override
-	public Set<Copia> findCopiasByLibroId(long libroId) {
+	public List<Copia> findCopiasByLibroId(long libroId) {
 		return copiaRepository.findCopiasByLibroId(libroId);
 	} 
 }

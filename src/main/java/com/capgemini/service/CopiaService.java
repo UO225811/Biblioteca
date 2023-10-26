@@ -1,7 +1,6 @@
 package com.capgemini.service;
 
 import java.util.List;
-import java.util.Set;
 
 import com.capgemini.model.Copia;
 
@@ -16,6 +15,6 @@ public interface CopiaService {
 	
 	int getNumberOfAvailableCopiesById();
 	
-	Set<Copia> findCopiasByLibroId(long libroId);
+	List<Copia> findCopiasByLibroId(long libroId);
 
 }

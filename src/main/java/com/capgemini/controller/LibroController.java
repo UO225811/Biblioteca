@@ -49,8 +49,8 @@ public class LibroController {
 			copiaService.saveCopy(c);
 		}
 		
-		Set<Copia> copias = copiaService.findCopiasByLibroId(libro.getId());
-		libro.setCopias(copias);
+		List<Copia> copias = copiaService.findCopiasByLibroId(libro.getId());
+		//libro.setCopias(copias);
 		
 		libroService.saveBook(libro);
 		return "redirect:/";

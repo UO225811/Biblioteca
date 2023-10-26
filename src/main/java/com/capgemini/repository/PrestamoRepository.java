@@ -8,7 +8,7 @@ import com.capgemini.model.Prestamo;
 
 public interface PrestamoRepository extends JpaRepository<Prestamo, Long>{
 	
-	@Query("SELECT count(*) from prestamos where fk_lector= :lectorid")
+	@Query(value= "SELECT count(*) from prestamos where fk_lector= :lectorid", nativeQuery = true)
 	int getPrestamoCountByLectorId(@Param("lectorid") long lectorId);
 
 }
