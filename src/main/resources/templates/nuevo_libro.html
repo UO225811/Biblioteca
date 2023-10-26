@@ -7,7 +7,7 @@
 <form action="#" th:action="@{/save}" th:object="${libro}" method="post">
 	<input th:field="*{titulo}" type="text" placeholder="Título del libro" class="form-control mb-4 col-4">
 <!-- Autor? -->
-	<input th:field="*{autor}" type="number" placeholder="Autor" class="form-control mb-4 col-1">
+	<input th:field="*{autor.id}" type="number" placeholder="Autor" class="form-control mb-4 col-1">
 	<input th:field="*{tipo}" type="text" placeholder="Tipo de libro" class="form-control mb-4 col-4">
 	<input th:field="*{editorial}" type="text" placeholder="Editorial del libro" class="form-control mb-4 col-4">
 	<input th:field="*{anyo}" type="number" placeholder="Año" class="form-control mb-4 col-1">

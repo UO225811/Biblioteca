@@ -18,4 +18,5 @@ public interface LibroService {
 
 	// Objeto página
 	Page<Libro> findPaginated(int pageNum, int pageSize, String sortField, String sortOrder);
+
 }

@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.capgemini.model.Autor;
 import com.capgemini.model.Libro;
+import com.capgemini.service.AutorService;
 import com.capgemini.service.LibroService;
 
 @Controller
@@ -20,6 +22,9 @@ public class LibroController {
 	
 	@Autowired
 	private LibroService libroService;
+	@Autowired
+	private AutorService autorService;
+
 
 	@GetMapping("/")
 	public String viewHomePage(Model model) {
@@ -28,6 +33,8 @@ public class LibroController {
 
 	@PostMapping("/save")
 	public String saveBook(@ModelAttribute("libro") Libro libro) {
+		Autor autor = autorService.getAuthorById(libro.getAutor().getId());
+		libro.setAutor(autor);
 		libroService.saveBook(libro);
 		return "redirect:/";
 	}
