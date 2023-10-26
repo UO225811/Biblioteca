@@ -3,9 +3,13 @@ package com.capgemini.model;
 import java.time.LocalDate;
 import java.util.Set;
 
+import com.capgemini.model.enums.Role;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,6 +33,10 @@ public class Lector {
 	@Column
 	private String direccion;
 	
+	@Enumerated( EnumType.STRING )
+    private Role role;
+	
+	private String password;
 	
 	@OneToMany(mappedBy="lector", targetEntity=Prestamo.class, cascade=CascadeType.ALL)
 	private Set<Prestamo> prestamos;
