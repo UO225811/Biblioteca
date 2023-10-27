@@ -53,14 +53,14 @@ public class WebSecurityConfiguration {
                 .requestMatchers("admin/delete/*").hasAuthority("ADMIN")
                 .requestMatchers("admin/update/*").hasAuthority("ADMIN")
                 .requestMatchers("/libro/add/*").hasAuthority("ADMIN")
-                .requestMatchers("/home/*").hasAuthority("ADMIN")
-                .requestMatchers("/home/*").hasAuthority("LECTOR")
+//                .requestMatchers("/home").hasAnyAuthority("ADMIN","LECTOR")
                 .requestMatchers("/signup").permitAll()
                 .requestMatchers("/login").permitAll()
+                .requestMatchers("/home").permitAll()
                 .anyRequest()
                 .authenticated())
 				.formLogin(login -> login.loginPage("/login").permitAll()
-                .defaultSuccessUrl("/home")/*.failureUrl("/error")*/).logout(logout -> logout.logoutSuccessUrl("/login")
+                .defaultSuccessUrl("/home").failureUrl("/error")).logout(logout -> logout.logoutSuccessUrl("/login")
                 .permitAll());
 
 		return http.build();

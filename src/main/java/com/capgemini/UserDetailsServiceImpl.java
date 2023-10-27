@@ -1,4 +1,4 @@
-package com.capgemini.service.impl;
+package com.capgemini;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -29,9 +29,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 //	        if (lector == null) {
 //	            throw new UsernameNotFoundException(username);
 //	        }
-	        grantedAuthorities.add(new SimpleGrantedAuthority(lector.getRole()));
 	        return new org.springframework.security.core.userdetails.User(
-	        		lector.getEmail(), lector.getPassword(), grantedAuthorities);
+	        		username, lector.getPassword(), grantedAuthorities);
 	}
 
 }

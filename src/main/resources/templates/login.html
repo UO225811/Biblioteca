@@ -1,32 +1,38 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
+<!DOCTYPE html>
+<html lang="es">
 <head th:replace="fragments/head" />
-
 <body>
 	<div class="container">
-		<h2>Identifícate</h2>
-		<form class="form-horizontal" method="post" action="/login" th>
-			<div class="form-group"><label class="control-label col-sm-2" for="username">Email:</label>
-				<div class="col-sm-10"><input type="text" class="form-control" id="username" name="username"
-						placeholder="Ejemplo: Pablo" required/></div>
-			</div>
-			<div class="form-group"><label class="control-label col-sm-2" for="username">Password:</label>
-				<div class="col-sm-10"><input type="password" class="form-control" id="password" name="password"
-						placeholder="Introduzca el Password" required/></div>
-			</div>
+		<h2>Inicio de sesión</h2>
+		<form class="form-horizontal" method="post" action="/login">
 			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-primary">Login</button>
+				<label class="control-label col-sm-2" for="username">Email</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="username" name="username" maxlength="70" required/>
 				</div>
 			</div>
-<!--			<div class="col-sm-offset-2 col-sm-10">-->
-<!--				<button action="/signup" class="btn btn-primary">Registro</button>-->
-<!--			</div>-->
-			<a href="/signup">Registro</a>
-<!--			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />-->
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="password">Password</label>
+				<div class="col-sm-10">
+					<input type="password" class="form-control" id="password" name="password" maxlength="70" required/>
+				</div>
+			</div>
+			
+			<!-- CREO QUE ESTO NO HACE NADA -->
+			<div class="alert alert-danger" role="alert" th:if="${loginFailure}">El email o la password son incorrectos</div>
+			
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-primary">Acceder</button>
+				</div>
+				<div class="col-sm-offset-2 col-sm-10">
+					<a href="/signup">Registro</a>
+				</div>
+			</div>
+			<input type="hidden" th:name="${_csrf.parameterName}"
+				th:value="${_csrf.token}" />
 		</form>
 	</div>
+		
 </body>
-
 </html>

@@ -35,7 +35,13 @@ public class LibroController {
 
 	@GetMapping("/")
 	public String viewHomePage(Model model) {
-		return findPaginated(1, "titulo", "asc", model);
+		return "redirect:home";
+//		return findPaginated(1, "titulo", "asc", model);
+	}
+	
+	@GetMapping("/home")
+	public String goHomePage(Model model) {
+		return "home";
 	}
 
 	@PostMapping("/save")
