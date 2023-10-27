@@ -1,0 +1,22 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/head" />
+
+<body>
+	<div class="container" style="text-align: center">
+		<h2>Bienvenid@</h2>
+		<h3>Área privada de lector</h3>
+		<p> Usuario Autenticado como :
+			<b th:inline="text" sec:authentication="principal.username"></b>
+		</p>
+		<p>Libros del usuario</p>
+<!--		<div class="table-responsive">-->
+<!--			<table class="table table-hover" th:replace="fragments/tableMarks" th:fragment="tableMarks" id="tableMarks">-->
+<!--			</table>-->
+<!--		</div>-->
+	</div>
+</body>
+
+</html>
