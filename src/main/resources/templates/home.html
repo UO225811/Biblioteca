@@ -5,8 +5,9 @@
 <head th:replace="fragments/head" />
 
 <body>
+	<head th:replace="fragments/nav" />
 	<div class="container" style="text-align: center">
-		<h2>Bienvenid@</h2>
+		<h2 th:text="#{welcome.message}"></h2>
 		<h3>Área privada de lector</h3>
 		<p> Usuario Autenticado como :
 			<b th:inline="text" sec:authentication="principal.username"></b>

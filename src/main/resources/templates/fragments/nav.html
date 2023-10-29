@@ -1,0 +1,90 @@
+<!-- Barra de Navegación superior -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <a class="navbar-brand" href="#" th:text="#{welcome.title}"></a>
+    <img src="/images/user.png" alt="logo"/>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+            aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="my-navbarColor02">
+        <ul class="navbar-nav mr-auto" sec:authorize="isAuthenticated()">
+            <li class="nav-item">
+                <a class="nav-link" href="/home"><span th:text="#{home.message}"></span></a>
+            </li>
+            <li class="nav-item dropdown active">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <span th:text="#{seeBooks.message}"></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/book/update" sec:authorize="hasRole('ADMIN')">
+                        <span th:text="#{updateBook.message}"></span>
+                    </a>
+                    <a class="dropdown-item" href="/book/add" sec:authorize="hasRole('ADMIN')">
+                        <span th:text="#{addBook.message}"></span>
+                    </a>
+                </div>
+            </li>
+            <li sec:authorize="hasRole('ADMIN')" id="users-menu" class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span th:text="#{usersManagement.message}"></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/user/add">
+                        <span th:text="#{addUser.message}"></span>
+                    </a>
+                    <a class="dropdown-item" href="/user/list">
+                        <span th:text="#{seeUsers.message}"></span>
+                    </a>
+                </div>
+            </li>
+        </ul>
+        <ul class="navbar-nav justify-content-end">
+<!--            <li class="nav-item dropdown">-->
+<!--                <a class="nav-link dropdown-toggle" href="#" id="btnLanguage" role="button" data-toggle="dropdown"-->
+<!--                   aria-haspopup="true" aria-expanded="false">-->
+<!--                    <span th:text="#{language.change}"></span>-->
+<!--                </a>-->
+<!--                <div id="languageDropdownMenuButton" class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+<!--                    <a class="dropdown-item" id="btnEnglish" value="EN">-->
+<!--                        <img src="/images/if_uk_flag.png" th:src="@{/images/if_uk_flag.png}"-->
+<!--                             style="border: 0; float: left; margin-right: 15px"/>-->
+<!--                        <span th:text="#{language.en}">Inglés</span>-->
+<!--                    </a>-->
+<!--                    <a class="dropdown-item" id="btnSpanish" value="ES">-->
+<!--                        <img src="/images/if_spain_flag.png" th:src="@{/images/if_spain_flag.png}"-->
+<!--                             style="border: 0; float: left; margin-right: 15px"/>-->
+<!--                        <span th:text="#{language.es}">Español</span>-->
+<!--                    </a>-->
+<!--                    <a class="dropdown-item" id="btnGerman" value="DE">-->
+<!--                        <img src="/images/if_de_flag.png" th:src="@{/images/if_de_flag.png}"-->
+<!--                             style="border: 0; float: left; margin-right: 15px"/>-->
+<!--                        <span th:text="#{language.de}">Alemán</span>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </li>-->
+            <li sec:authorize="!isAuthenticated()" class="nav-item">
+                <a class="nav-link" href="/signup" th:text="#{signup.message}">
+                    <i class='fas fa-user-alt' style='font-size:16px'></i>
+                    </a>
+            </li>
+            <li sec:authorize="!isAuthenticated()" class="nav-item">
+                <a class="nav-link" href="/login" th:text="#{login.message}">
+                    <i class='fas fa-sign-in-alt' style='font-size:16px'></i>
+                    </a>
+            </li>
+            <li sec:authorize="isAuthenticated()" class="nav-item">
+                <a class="nav-link" href="/logout" th:text="#{signout.message}">
+                    <i class='fas fa-sign-out-alt' style='font-size:16px'></i>
+                    <span th:text="#{signout.message}"></span>
+                </a>
+            </li>
+        </ul>
+        <!--<form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+        </form> -->
+    </div>
+</nav>

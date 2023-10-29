@@ -35,7 +35,7 @@ public class LectorController {
 		lector.setRole(rolesService.getRoles()[0]);
 		lectorService.saveLector(lector);
 //        securityService.autoLogin(lector.getEmail(), lector.getPassword());
-		return "redirect:home";
+		return "redirect:login";
 	}
 
 }
