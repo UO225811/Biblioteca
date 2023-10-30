@@ -1,6 +1,5 @@
 <!-- Barra de Navegación superior -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary"
-     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="#" th:text="#{welcome.title}"></a>
     <img src="/images/user.png" alt="logo"/>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
@@ -18,10 +17,10 @@
                     <span th:text="#{seeBooks.message}"></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/book/update" sec:authorize="hasRole('ADMIN')">
+                    <a class="dropdown-item" href="/book/update">
                         <span th:text="#{updateBook.message}"></span>
                     </a>
-                    <a class="dropdown-item" href="/book/add" sec:authorize="hasRole('ADMIN')">
+                    <a class="dropdown-item" href="/book/add">
                         <span th:text="#{addBook.message}"></span>
                     </a>
                 </div>
