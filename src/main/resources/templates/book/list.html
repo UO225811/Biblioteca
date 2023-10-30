@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.thymeleaf.org">
 
-<head th:replace="fragments/head"></head>
+<head th:replace="~{fragments/head}" />
 
 <body>
+	<nav th:replace="~{fragments/nav}" />
 	<h3>Listado de libros</h3>
-	<a class="btn btn-primary btn-sm mb-3" th:href="@{/add}">
+	<a class="btn btn-primary btn-sm mb-3" th:href="@{/add}" sec:authorize="hasRole('ADMIN')">
 		Agregar un libro
 	</a>
 	<section>

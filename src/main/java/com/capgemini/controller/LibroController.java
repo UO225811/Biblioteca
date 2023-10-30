@@ -43,6 +43,11 @@ public class LibroController {
 	public String goHomePage(Model model) {
 		return "home";
 	}
+	
+	@GetMapping("/book/list")
+	public String showList(Model model) {
+		return findPaginated(1, "titulo", "asc", model);
+	}
 
 	@PostMapping("/save")
 	public String saveBook(@ModelAttribute("libro") Libro libro, @RequestParam("numCopias") int numCopias) {
@@ -75,11 +80,11 @@ public class LibroController {
 		return "actualizar_libro";
 	}
 
-	@GetMapping("/add")
+	@GetMapping("/book/add")
 	public String showNewBookForm(Model model) {
 		Libro libro = new Libro();
 		model.addAttribute("libro", libro);
-		return "nuevo_libro";
+		return "book/add";
 	}
 
 	@GetMapping("/page/{pageNumber}")
@@ -89,6 +94,8 @@ public class LibroController {
 		Page<Libro> page = libroService.findPaginated(pageNum, pageSize, sortField, sortOrder);
 		List<Libro> books = page.getContent();
 
+		
+		
 		model.addAttribute("sortOrder", sortOrder);
 		model.addAttribute("sortField", sortField);
 		model.addAttribute("currentPage", pageNum);
@@ -97,7 +104,7 @@ public class LibroController {
 		model.addAttribute("totalItems", page.getTotalElements());
 		model.addAttribute("reverseSortDir", sortOrder.equalsIgnoreCase("asc") ? "desc" : "asc");
 
-		return "index";
+		return "/book/list";
 	}
 	
 }

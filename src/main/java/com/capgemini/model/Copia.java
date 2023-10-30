@@ -23,7 +23,7 @@ public class Copia {
 	@Column
 	private EstadoCopia estado;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="fk_libro")
 	private Libro libro;
 
