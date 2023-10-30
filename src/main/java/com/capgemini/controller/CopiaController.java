@@ -40,8 +40,14 @@ public class CopiaController {
 		model.addAttribute("copies", copies);
 		model.addAttribute("totalItems", page.getTotalElements());
 		model.addAttribute("reverseSortDir", sortOrder.equalsIgnoreCase("asc") ? "desc" : "asc");
+		model.addAttribute("titulo", libroService.getBookById(libroId).getTitulo());
 
-		return "copy/list";
+		return "/copy/list";
+	}
+	
+	@GetMapping("/book/{id}/list")
+	public String showList(@PathVariable(value="id") long id, Model model) {
+		return findPaginated(id, 1, "id", "asc", model);
 	}
 	
 	
@@ -49,14 +55,14 @@ public class CopiaController {
 	public String showFormForUpdating(@PathVariable(value="id") long id, Model model) {
 		Copia copia = this.copiaService.getCopyById(id);
 		model.addAttribute("copia", copia);
-		return "copy/update";
+		return "/copy/update";
 	}
 	
 	@GetMapping("/book/{id}/add_copies")
 	public String showNewCopyForm(@PathVariable(value="id") long id, Model model) {
 		Libro libro = libroService.getBookById(id);
 		model.addAttribute("book", libro);
-		return "copy/add";
+		return "/copy/add";
 	}
 	
 	@PostMapping("/copy/save")
