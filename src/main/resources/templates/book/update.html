@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>Actualizar libro</title>
-</head>
+<head th:replace="~{fragments/head}" />
 <body>
-<p>hola</p>
+<nav th:replace="~{fragments/nav}" />
+<form action="#" th:action="@{/save_updated}" th:object="${libro}" method="post">
+	<input type="hidden" th:field="*{id}">
+	<input th:field="${libro.titulo}" type="text" placeholder="Título del libro" class="form-control mb-4 col-4">
+	<input th:field="*{autor.id}" type="number" placeholder="Autor" class="form-control mb-4 col-1">
+	<input th:field="*{tipo}" type="text" placeholder="Tipo de libro" class="form-control mb-4 col-4">
+	<input th:field="*{editorial}" type="text" placeholder="Editorial del libro" class="form-control mb-4 col-4">
+	<input th:field="*{anyo}" type="number" placeholder="Año" class="form-control mb-4 col-1">
+	
+	<button type="submit" class="btn btn-info col-2">Guardar libro</button>
+</form>
+<hr>
+<a th:href="@{/book/list}">Volver</a>
+<footer th:replace="~{fragments/footer}" />
 </body>
 </html>

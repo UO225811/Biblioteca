@@ -51,7 +51,7 @@ public class CopiaController {
 	}
 	
 	
-	@GetMapping("/copy/update/{id}")
+	@GetMapping("/copy/{id}/update")
 	public String showFormForUpdating(@PathVariable(value="id") long id, Model model) {
 		Copia copia = this.copiaService.getCopyById(id);
 		model.addAttribute("copia", copia);
@@ -85,5 +85,11 @@ public class CopiaController {
 		return findPaginated(id, 1, "id", "asc", model);
 	}
 	
+	@GetMapping("/copy/{id}/delete")
+	public String deleteCopia(@PathVariable(value="id") long id) {
+		long bookId = copiaService.getCopyById(id).getLibro().getId();
+		this.copiaService.deleteCopyById(id);
+		return "redirect:/book/" + bookId + "/list";
+	}
 	
 }

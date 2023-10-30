@@ -20,6 +20,8 @@
 						<th><a
 								th:href="@{'/page/' + ${currentPage} + '?sortField=editorial&sortOrder=' + ${reverseSortDir}}">Estado</a>
 						</th>
+						<th>Acciones
+						</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -27,6 +29,10 @@
 						<td th:text="${copy.libro.titulo}"></td>
 						<td th:text="${copy.id}"></td>
 						<td th:text="${copy.estado}"></td>
+						<td>
+							<a th:href="@{'/copy/' + ${copy.id} + '/update'}" class="btn btn-primary">Editar</a>
+							<a th:href="@{'/copy/' + ${copy.id} + '/delete'}" class="btn btn-danger">Eliminar</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -35,6 +41,8 @@
 		</div>
 		</div>
 	</section>
+	<a th:href="@{'/book/list'}">Volver</a>
+	<footer th:replace="~{fragments/footer}" />
 </body>
 
 </html>

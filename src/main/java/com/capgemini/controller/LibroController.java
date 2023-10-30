@@ -64,6 +64,16 @@ public class LibroController {
 		
 		return "redirect:/book/list";
 	}
+	
+	@PostMapping("/save_updated")
+	public String saveBook(@ModelAttribute("libro") Libro libro) {
+		Autor autor = autorService.getAuthorById(libro.getAutor().getId());
+		libro.setAutor(autor);		
+		
+		libroService.saveBook(libro);
+		
+		return "redirect:/book/list";
+	}
 
 	@GetMapping("/delete/{id}")
 	public String deleteBook(@PathVariable(value="id") long id) {
@@ -73,7 +83,6 @@ public class LibroController {
 
 	@GetMapping("/book/{id}/update")
 	public String showFormForUpdating(@PathVariable(value="id") long id, Model model) {
-		System.out.println("Entra");
 		Libro libro = this.libroService.getBookById(id);
 		model.addAttribute("libro", libro);
 		return "/book/update";
