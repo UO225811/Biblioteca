@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head}" />
+
+<body>
+	<nav th:replace="~{fragments/nav}" />
+	<section>
+		<div class="container">
+			<h3>Gestión Alta de Autores</h3>
+			<form action="#" th:action="@{/save}" th:object="${autor}" method="post">
+				<input th:field="*{nombre}" type="text" placeholder="Tipo de libro" class="form-control mb-4 col-4">
+				<input th:field="*{nacionalidad}" type="text" placeholder="Editorial del libro"
+					class="form-control mb-4 col-4">
+				<input th:field="*{fechanacimiento}" type="number" placeholder="Año" class="form-control mb-4 col-1">
+				<button type="submit" class="btn btn-info col-2">Guardar autor</button>
+			</form>
+			<hr>
+			<a th:href="@{/}">Volver</a>
+		</div>
+	</section>
+	<footer th:replace="~{fragments/footer}" />
+</body>
+
+</html>
