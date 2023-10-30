@@ -33,9 +33,12 @@
 				<a class="nav-link" href="/login" th:text="#{login.message}"></a>
 			</li>
 			<br>
-			<li sec:authorize="isAuthenticated()" class="nav-item" style="list-style-type: none;">
-				<a class="nav-link" href="/logout" th:text="#{logout.message}"></a>
-			</li>
+			<li sec:authorize="isAuthenticated()" style="list-style-type: none;">
+					<form sec:authorize="isAuthenticated()"	class="navbar-form navbar-right" action="/logout" method="post">
+						<input class="btn btn-default" type="submit" value="Salir">
+						<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+					</form>
+				</li>
 		</div>
 	</div>
 </nav>
