@@ -4,6 +4,7 @@
 <head th:replace="~{fragments/head}" />
 
 <body>
+	<nav th:replace="~{fragments/nav}" />
 	<div class="container">
 		<h2>Regístrate como lector</h2>
 		<form class="form-horizontal" method="post" action="#" th:action="@{/signup}" th:object="${lector}">
@@ -34,6 +35,7 @@
 			</div>
 		</form>
 	</div>
+	<footer th:replace="~{fragments/footer}" />
 </body>
 
 </html>
