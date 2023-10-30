@@ -50,12 +50,8 @@ public class WebSecurityConfiguration {
 		http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("book/add").hasAuthority("ROLE_ADMIN")
                 .requestMatchers("book/update").hasAuthority("ROLE_ADMIN")
-//                .requestMatchers("admin/delete/*").hasAuthority("ADMIN")
-//                .requestMatchers("admin/update/*").hasAuthority("ADMIN")
                 .requestMatchers("book/list").hasAnyAuthority("ROLE_ADMIN","ROLE_LECTOR")
-                .requestMatchers("/signup").permitAll()
-                .requestMatchers("/login").permitAll()
-                .requestMatchers("/home").permitAll()
+                .requestMatchers("home").hasAnyAuthority("ROLE_ADMIN","ROLE_LECTOR")
                 .anyRequest()
                 .authenticated())
 				.formLogin(login -> login.loginPage("/login").permitAll()
