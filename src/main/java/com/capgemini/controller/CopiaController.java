@@ -59,7 +59,7 @@ public class CopiaController {
 		return "copy/add";
 	}
 	
-	@PostMapping("/save")
+	@PostMapping("/copy/save")
 	public String saveCopy(@ModelAttribute("copia") Copia copia, @RequestParam EstadoCopia e, Model model) {
 		copia.setEstado(e);
 		copiaService.saveCopy(copia);
@@ -67,7 +67,7 @@ public class CopiaController {
 		return findPaginated(id, 1, "id", "asc", model);
 	}
 	
-	@PostMapping("saveMultiple")
+	@PostMapping("/copy/saveMultiple")
 	public String saveCopies(@ModelAttribute("book") Libro libro, @RequestParam int numCopias, Model model) {
 		for(int i=0;i<numCopias;i++) {
 			Copia c = new Copia();
