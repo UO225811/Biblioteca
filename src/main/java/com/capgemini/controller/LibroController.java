@@ -1,8 +1,6 @@
 package com.capgemini.controller;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -64,27 +62,28 @@ public class LibroController {
 			copiaService.saveCopy(c);
 		}
 		
-		return "redirect:/";
+		return "redirect:/book/list";
 	}
 
 	@GetMapping("/delete/{id}")
 	public String deleteBook(@PathVariable(value="id") long id) {
 		this.libroService.deleteBookById(id);
-		return "redirect:/";
+		return "redirect:/book/list";
 	}
 
-	@GetMapping("/update/{id}")
+	@GetMapping("/book/{id}/update")
 	public String showFormForUpdating(@PathVariable(value="id") long id, Model model) {
+		System.out.println("Entra");
 		Libro libro = this.libroService.getBookById(id);
 		model.addAttribute("libro", libro);
-		return "actualizar_libro";
+		return "/book/update";
 	}
 
 	@GetMapping("/book/add")
 	public String showNewBookForm(Model model) {
 		Libro libro = new Libro();
 		model.addAttribute("libro", libro);
-		return "book/add";
+		return "/book/add";
 	}
 
 	@GetMapping("/page/{pageNumber}")

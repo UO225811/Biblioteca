@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head}" />
+
+<body>
+	<nav th:replace="~{fragments/nav}" />
+	<h3>Gestión de copias</h3>
+	<section>
+		<div class="container">
+			<table class="table table-striped table-responsive-md">
+				<thead>
+					<tr>
+						<th><a
+								th:href="@{'/page/' + ${currentPage} + '?sortField=titulo&sortOrder=' + ${reverseSortDir}}">Título</a>
+						</th>						
+						<th><a
+								th:href="@{'/page/' + ${currentPage} + '?sortField=autor.nombre&sortOrder=' + ${reverseSortDir}}">ID copia</a>
+						</th>
+						<th><a
+								th:href="@{'/page/' + ${currentPage} + '?sortField=editorial&sortOrder=' + ${reverseSortDir}}">Estado</a>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="copy:${copies}">
+						<td th:text="${copy.libro.titulo}"></td>
+						<td th:text="${copy.id}"></td>
+						<td th:text="${copy.estado}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<!--Botonera para moverme en las páginas-->
+			<div th:replace="fragments/pagination" />
+		</div>
+		</div>
+	</section>
+</body>
+
+</html>

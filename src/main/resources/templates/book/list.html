@@ -6,7 +6,7 @@
 <body>
 	<nav th:replace="~{fragments/nav}" />
 	<h3>Listado de libros</h3>
-	<a class="btn btn-primary btn-sm mb-3" th:href="@{/add}" sec:authorize="hasRole('ADMIN')">
+	<a class="btn btn-primary btn-sm mb-3" th:href="@{/book/add}" sec:authorize="hasRole('ADMIN')">
 		Agregar un libro
 	</a>
 	<section>
@@ -31,6 +31,8 @@
 						</th>
 						<th>Copias
 						</th>
+						<th>Acciones
+						</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -41,6 +43,11 @@
 						<td th:text="${book.editorial}"></td>
 						<td th:text="${book.anyo}"></td>
 						<td th:text="${book.ncopias}"></td>
+						<td>
+							<a th:href="@{'/book/' + ${book.id} + '/update'}" class="btn btn-primary">Editar</a>
+							<a th:href="@{'/book/' + ${book.id} + '/list'}" class="btn btn-info">Gestionar copias</a>
+							<a th:href="@{'/delete/' + ${book.id}}" class="btn btn-danger">Eliminar</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -51,4 +58,4 @@
 	</section>
 </body>
 
-</htmll>
+</html>
