@@ -9,21 +9,29 @@
 		<div class="container">
 			<h3>Gestión Alta de Libros</h3>
 			<form action="#" th:action="@{/save}" th:object="${libro}" method="post">
-				<input th:field="${libro.titulo}" type="text" placeholder="Título del libro" class="form-control mb-4 col-4">
+				<input th:field="${libro.titulo}" type="text" placeholder="Título del libro"
+					class="form-control mb-4 col-4">
 				<select th:field="*{autor.id}" class="form-control col-4 mb-4">
-					
-    				<option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.nombre}"></option>
+
+					<option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.nombre}"></option>
 				</select>
-				<input th:field="*{tipo}" type="text" placeholder="Tipo de libro" class="form-control mb-4 col-4">
-				<input th:field="*{editorial}" type="text" placeholder="Editorial del libro" class="form-control mb-4 col-4">
+				<select th:field="*{tipo}" class="form-control col-4 mb-4">
+					<option th:value="NOVELA" th:text="Novela"></option>
+					<option th:value="TEATRO" th:text="Teatro"></option>
+					<option th:value="POESIA" th:text="Poesía"></option>
+					<option th:value="ENSAYO" th:text="Ensayo"></option>
+				</select>
+				<input th:field="*{editorial}" type="text" placeholder="Editorial del libro"
+					class="form-control mb-4 col-4">
 				<input th:field="*{anyo}" type="number" placeholder="Año" class="form-control mb-4 col-1">
 				<input name="numCopias" type="number" placeholder="Copias" class="form-control mb-4 col-2">
 				<button type="submit" class="btn btn-info col-2">Guardar libro</button>
 			</form>
 			<hr>
 			<a th:href="@{/}">Volver</a>
-			</div></section>
-			<footer th:replace="~{fragments/footer}" />
+		</div>
+	</section>
+	<footer th:replace="~{fragments/footer}" />
 </body>
 
 </html>
