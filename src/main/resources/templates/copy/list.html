@@ -6,6 +6,10 @@
 <body>
 	<nav th:replace="~{fragments/nav}" />
 	<h3>Gestión de copias</h3>
+	<form action="#" th:action="@{'/book/' + ${idlibro} + '/add_copies'}" th:object="${idlibro}" method="post" sec:authorize="hasRole('ADMIN')">
+		<input name="numCopias" type="number" placeholder="Cantidad" class="form-control mb-4 col-1">
+		<button type="submit" class="btn btn-info col-2">Añadir copias</button>
+	</form>
 	<section>
 		<div class="container">
 			<table class="table table-striped table-responsive-md">
@@ -36,8 +40,6 @@
 					</tr>
 				</tbody>
 			</table>
-			<!--Botonera para moverme en las páginas-->
-			<div th:replace="fragments/pagination" />
 		</div>
 		</div>
 	</section>

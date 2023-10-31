@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.capgemini.model.Autor;
 import com.capgemini.model.Copia;
 import com.capgemini.model.Libro;
 import com.capgemini.model.enums.EstadoCopia;
@@ -41,6 +42,7 @@ public class CopiaController {
 		model.addAttribute("totalItems", page.getTotalElements());
 		model.addAttribute("reverseSortDir", sortOrder.equalsIgnoreCase("asc") ? "desc" : "asc");
 		model.addAttribute("titulo", libroService.getBookById(libroId).getTitulo());
+		model.addAttribute("idlibro", libroService.getBookById(libroId).getId());
 
 		return "/copy/list";
 	}
@@ -58,19 +60,25 @@ public class CopiaController {
 		return "/copy/update";
 	}
 	
-	@GetMapping("/book/{id}/add_copies")
-	public String showNewCopyForm(@PathVariable(value="id") long id, Model model) {
+	@PostMapping("/book/{id}/add_copies")
+	public String showNewCopyForm(@PathVariable(value="id") long id, @RequestParam int numCopias, Model model) {
 		Libro libro = libroService.getBookById(id);
-		model.addAttribute("book", libro);
-		return "/copy/add";
+
+		for(int i=0; i<numCopias; i++) {
+			Copia c = new Copia();
+			c.setEstado(EstadoCopia.BIBLIOTECA);
+			c.setLibro(libro);
+			copiaService.saveCopy(c);
+		}
+		
+		return "redirect:/book/" + id + "/list";
 	}
 	
 	@PostMapping("/copy/save")
-	public String saveCopy(@ModelAttribute("copia") Copia copia, @RequestParam EstadoCopia e, Model model) {
-		copia.setEstado(e);
+	public String saveCopy(@ModelAttribute("copia") Copia copia) {
 		copiaService.saveCopy(copia);
 		long id = copia.getLibro().getId();
-		return findPaginated(id, 1, "id", "asc", model);
+		return "redirect:/book/" + id + "/list";
 	}
 	
 	@PostMapping("/copy/saveMultiple")

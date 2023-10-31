@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{fragments/head}" />
+<body>
+<nav th:replace="~{fragments/nav}" />
+<form action="#" th:action="@{/copy/save}" th:object="${copia}" method="post">
+	<input type="hidden" th:field="*{id}">
+	<select th:field="*{estado}" class="form-control col-4 mb-4">
+    		<option th:value="PRESTADO" th:text="Prestado"></option>
+    		<option th:value="RETRASO" th:text="Prestado"></option>
+    		<option th:value="BIBLIOTECA" th:text="Biblioteca"></option>
+    		<option th:value="REPARACION" th:text="Reparación"></option>
+	</select>
+	<input type="hidden" th:field="*{libro}">
+	<button type="submit" class="btn btn-info col-2">Guardar copia</button>
+</form>
+<hr>
+<a th:href="@{/book/list}">Volver</a>
+<footer th:replace="~{fragments/footer}" />
+</body>
+</html>

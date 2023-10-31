@@ -84,14 +84,18 @@ public class LibroController {
 	@GetMapping("/book/{id}/update")
 	public String showFormForUpdating(@PathVariable(value="id") long id, Model model) {
 		Libro libro = this.libroService.getBookById(id);
+		List<Autor> autores = autorService.getAllAutores();
 		model.addAttribute("libro", libro);
+		model.addAttribute("authors", autores);
 		return "/book/update";
 	}
 
 	@GetMapping("/book/add")
 	public String showNewBookForm(Model model) {
 		Libro libro = new Libro();
+		List<Autor> autores = autorService.getAllAutores();
 		model.addAttribute("libro", libro);
+		model.addAttribute("authors", autores);
 		return "/book/add";
 	}
 

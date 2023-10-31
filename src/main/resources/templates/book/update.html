@@ -6,7 +6,9 @@
 <form action="#" th:action="@{/save_updated}" th:object="${libro}" method="post">
 	<input type="hidden" th:field="*{id}">
 	<input th:field="${libro.titulo}" type="text" placeholder="Título del libro" class="form-control mb-4 col-4">
-	<input th:field="*{autor.id}" type="number" placeholder="Autor" class="form-control mb-4 col-1">
+	<select th:field="*{autor.id}" class="form-control col-4 mb-4">
+    		<option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.nombre}"></option>
+	</select>
 	<input th:field="*{tipo}" type="text" placeholder="Tipo de libro" class="form-control mb-4 col-4">
 	<input th:field="*{editorial}" type="text" placeholder="Editorial del libro" class="form-control mb-4 col-4">
 	<input th:field="*{anyo}" type="number" placeholder="Año" class="form-control mb-4 col-1">
