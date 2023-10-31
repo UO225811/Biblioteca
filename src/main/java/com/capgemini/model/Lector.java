@@ -3,6 +3,8 @@ package com.capgemini.model;
 import java.time.LocalDate;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,6 +41,7 @@ public class Lector {
 	@Transient
 	private String passwordConfirm;
 
+	@JsonBackReference
 	@OneToMany(mappedBy = "lector", targetEntity = Prestamo.class, cascade = CascadeType.ALL)
 	private Set<Prestamo> prestamos;
 

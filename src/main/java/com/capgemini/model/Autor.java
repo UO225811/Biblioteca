@@ -5,6 +5,8 @@ import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,6 +32,7 @@ public class Autor {
 	@DateTimeFormat(pattern="YYYY-MM-dd")
 	private LocalDate fechaNacimiento;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy="autor", targetEntity=Libro.class, cascade=CascadeType.ALL)
 	private Set<Libro> obras;
 

@@ -3,6 +3,8 @@ package com.capgemini.model;
 import java.util.Set;
 
 import com.capgemini.model.enums.TipoLibro;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -33,9 +35,11 @@ public class Libro {
 	@Column
 	private int anyo;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy="libro", targetEntity=Copia.class, cascade=CascadeType.ALL)
 	private Set<Copia> copias;
 	
+	@JsonManagedReference
 	@ManyToOne(/*fetch=FetchType.LAZY*/)
 	@JoinColumn(name="fk_autor")
 	private Autor autor;
