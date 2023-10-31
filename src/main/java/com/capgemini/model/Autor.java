@@ -3,6 +3,8 @@ package com.capgemini.model;
 import java.time.LocalDate;
 import java.util.Set;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,6 +27,7 @@ public class Autor {
 	@Column
 	private String nacionalidad;
 	@Column
+	@DateTimeFormat(pattern="YYYY-MM-dd")
 	private LocalDate fechaNacimiento;
 	
 	@OneToMany(mappedBy="autor", targetEntity=Libro.class, cascade=CascadeType.ALL)

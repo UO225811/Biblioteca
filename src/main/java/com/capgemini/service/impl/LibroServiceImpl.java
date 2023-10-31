@@ -19,7 +19,7 @@ public class LibroServiceImpl implements LibroService {
 
 	@Autowired
 	private LibroRepository libroRepository;
-	
+
 	@Override
 	public Libro getBookById(long id) {
 		Optional<Libro> opt = libroRepository.findById(id);
@@ -51,7 +51,7 @@ public class LibroServiceImpl implements LibroService {
 		Sort sort = sortOrder.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending()
 				: Sort.by(sortField).descending();
 
-		Pageable pageable = PageRequest.of(pageNum-1, pageSize, sort);
+		Pageable pageable = PageRequest.of(pageNum - 1, pageSize, sort);
 
 		return this.libroRepository.findAll(pageable);
 	}

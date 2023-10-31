@@ -16,7 +16,6 @@ public interface LibroService {
 
 	void deleteBookById(long id);
 
-	// Objeto página
 	Page<Libro> findPaginated(int pageNum, int pageSize, String sortField, String sortOrder);
 
 }
