@@ -42,15 +42,23 @@
 						<td th:text="${book.autor.nombre}"></td>
 						<td th:text="${book.editorial}"></td>
 						<td th:text="${book.anyo}"></td>
-						<td th:text="${book.ncopias}"></td>
+							<div sec:authorize="hasRole('ADMIN')" >
+								<td th:text="${book.ncopias}">
+							</div>
+							<div sec:authorize="hasRole('LECTOR')" >
+								<td th:text="${book.ncopiasDisponibles}">
+							</div>
+						</td>
 						<td>
 							<div sec:authorize="hasRole('ADMIN')">
 								<a th:href="@{'/book/' + ${book.id} + '/update'}" class="btn btn-primary">Editar</a>
-								<a th:href="@{'/book/' + ${book.id} + '/list'}" class="btn btn-info">Gestionar copias</a>
+								<a th:href="@{'/book/' + ${book.id} + '/list'}" class="btn btn-info">Gestionar
+									copias</a>
 								<a th:href="@{'/delete/' + ${book.id}}" class="btn btn-danger">Eliminar</a>
 							</div>
 							<div sec:authorize="hasRole('LECTOR')" th:if="${book.ncopiasDisponibles} > 0">
-								<a th:href="@{'/error'}" class="btn btn-primary">Solicitar</a>
+								<a th:href="@{'/book/' + ${book.id} + '/lease'}" class="btn btn-primary">Solicitar</a>
+								</a>
 							</div>
 						</td>
 					</tr>
