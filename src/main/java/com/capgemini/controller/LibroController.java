@@ -123,12 +123,11 @@ public class LibroController {
 		model.addAttribute("reverseSortDir", sortOrder.equalsIgnoreCase("asc") ? "desc" : "asc");
 
 		if(SecurityContextHolder.getContext().getAuthentication().getAuthorities()
-				.stream().anyMatch(a -> a.getAuthority().equals("LECTOR"))) {
+				.stream().anyMatch(a -> a.getAuthority().equals("ROLE_LECTOR"))) {
 			long lectorId = lectorService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).getnSocio();
-			model.addAttribute("maxPrestamos", prestamoService.getNumPrestamos(lectorId)>=3);
+			model.addAttribute("maxPrestamos", prestamoService.getNumPrestamos(lectorId)<3);
 		}
 		
 		return "/book/list";
 	}
-	
 }
