@@ -23,8 +23,8 @@ public class Multa {
 	private LocalDate fInicio;
 	@Column
 	private LocalDate fFin;
-	
-	@OneToOne(optional=true, mappedBy="multa",targetEntity=Lector.class, cascade=CascadeType.ALL)
+	//TODO Hace falta probar con otro cascade
+	@OneToOne(optional=false, mappedBy="multa",targetEntity=Lector.class /*, cascade=CascadeType.ALL*/)
 	private Lector lector;
 
 	public LocalDate getfInicio() {

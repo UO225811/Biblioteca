@@ -15,7 +15,7 @@ import com.capgemini.service.MultaService;
 
 @Service
 public class MultaServiceImpl implements MultaService {
-	
+
 	@Autowired
 	private MultaRepository multaRepository;
 	@Autowired
@@ -24,11 +24,12 @@ public class MultaServiceImpl implements MultaService {
 	@Override
 	public void multar(LocalDate finPrestamo, Lector l) {
 		// calcular dias de multa
-		long multa = ChronoUnit.DAYS.between(LocalDate.now(), finPrestamo) * 2;
+		long multa = ChronoUnit.DAYS.between(finPrestamo, LocalDate.now()) * 2;
 		// ver si ya hay una multa
-		Multa m = l.getMulta();
+		Multa m = null;
 		// si hay, sumar los dias (actualizar)
-		if(m != null) {
+		if (l.getMulta() != null) {
+			m = l.getMulta();
 			m.setfFin(m.getfFin().plusDays(multa));
 		}
 		// else: crear ulta con duracion
@@ -38,6 +39,7 @@ public class MultaServiceImpl implements MultaService {
 			m.setfFin(LocalDate.now().plusDays(multa));
 		}
 		l.setMulta(m);
+		multaRepository.save(m);
 		lectorRepository.save(l);
 	}
 
@@ -48,7 +50,7 @@ public class MultaServiceImpl implements MultaService {
 
 	@Override
 	public void deleteMultaByLectorId(long id) {
-		
+
 		multaRepository.deleteByLectorId(id);
 	}
 
@@ -71,6 +73,5 @@ public class MultaServiceImpl implements MultaService {
 	public void deleteMulta(Multa m) {
 		multaRepository.delete(m);
 	}
-	
 
 }
