@@ -49,9 +49,8 @@
 								<a th:href="@{'/book/' + ${book.id} + '/list'}" class="btn btn-info">Gestionar copias</a>
 								<a th:href="@{'/delete/' + ${book.id}}" class="btn btn-danger">Eliminar</a>
 							</div>
-							<div sec:authorize="hasRole('LECTOR')">
+							<div sec:authorize="hasRole('LECTOR')" th:if="${book.ncopiasDisponibles} > 0">
 								<a th:href="@{'/error'}" class="btn btn-primary">Solicitar</a>
-								<a th:href="@{'/error'}" class="btn btn-secondary">Devolver</a>
 							</div>
 						</td>
 					</tr>

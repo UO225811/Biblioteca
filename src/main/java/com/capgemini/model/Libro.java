@@ -2,6 +2,7 @@ package com.capgemini.model;
 
 import java.util.Set;
 
+import com.capgemini.model.enums.EstadoCopia;
 import com.capgemini.model.enums.TipoLibro;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -103,5 +104,14 @@ public class Libro {
 	
 	public int getNcopias() {
 		return copias.size();
+	}
+	
+	public int getNcopiasDisponibles() {
+		int n = 0;
+		for(Copia c: copias) {
+			if(c.getEstado() == (EstadoCopia.BIBLIOTECA))
+				n++;
+		}
+		return n;
 	}
 }

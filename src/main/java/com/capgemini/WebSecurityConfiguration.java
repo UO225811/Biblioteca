@@ -48,8 +48,8 @@ public class WebSecurityConfiguration {
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(auth -> auth
 				.requestMatchers("/signup").permitAll()
+                .requestMatchers("/","/home","/book/list","/page/**").hasAnyAuthority("ROLE_ADMIN","ROLE_LECTOR")
                 .requestMatchers("/**").hasAuthority("ROLE_ADMIN")
-                .requestMatchers("*/home","*/book/list").hasAuthority("ROLE_LECTOR")
                 .anyRequest()
                 .authenticated())
 				.formLogin(login -> login.loginPage("/login").permitAll()
