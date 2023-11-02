@@ -46,17 +46,15 @@ public class WebSecurityConfiguration {
 	 */
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		
-//		http.csrf().disable().authorizeHttpRequests(auth -> auth
-//				.requestMatchers("/**").permitAll());
-//				.requestMatchers("/signup").permitAll()
-//                .requestMatchers("/**").hasAuthority("ROLE_ADMIN")
-//                .requestMatchers("/?continue", "home", "book/list").hasAnyAuthority("ROLE_LECTOR")
-//                .anyRequest()
-//                .authenticated())
-//				.formLogin(login -> login.loginPage("/login").permitAll()
-//                .defaultSuccessUrl("/home").failureUrl("/error")).logout(logout -> logout.logoutSuccessUrl("/login")
-//                .permitAll());
+		http.authorizeHttpRequests(auth -> auth
+				.requestMatchers("/signup").permitAll()
+                .requestMatchers("/**").hasAuthority("ROLE_ADMIN")
+                .requestMatchers("*/home","*/book/list").hasAuthority("ROLE_LECTOR")
+                .anyRequest()
+                .authenticated())
+				.formLogin(login -> login.loginPage("/login").permitAll()
+                .defaultSuccessUrl("/home").failureUrl("/error")).logout(logout -> logout.logoutSuccessUrl("/login")
+                .permitAll());
 
 		return http.build();
 	}

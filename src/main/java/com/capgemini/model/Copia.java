@@ -1,6 +1,7 @@
 package com.capgemini.model;
 
 import com.capgemini.model.enums.EstadoCopia;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
@@ -24,7 +25,7 @@ public class Copia {
 	@Column
 	private EstadoCopia estado;
 	
-	@JsonManagedReference
+	@JsonBackReference
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="fk_libro")
 	private Libro libro;

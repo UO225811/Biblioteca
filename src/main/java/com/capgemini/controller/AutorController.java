@@ -21,9 +21,8 @@ public class AutorController {
 	@Autowired
 	private AutorService autorService;
 
-	public String findPaginated(
-			@PathVariable(value = "pageNumber") int pageNum, @RequestParam("sortField") String sortField,
-			@RequestParam("sortOrder") String sortOrder, Model model) {
+	public String findPaginated(@PathVariable(value = "pageNumber") int pageNum,
+			@RequestParam("sortField") String sortField, @RequestParam("sortOrder") String sortOrder, Model model) {
 		int pageSize = 4;
 		Page<Autor> page = autorService.findPaginated(pageNum, pageSize, sortField, sortOrder);
 		List<Autor> autores = page.getContent();
@@ -45,11 +44,19 @@ public class AutorController {
 	}
 
 	@GetMapping("/author/{id}/update")
-	public String authorUpdatingForm(@PathVariable(value = "id") long id, Model model) {
-		Autor autor = this.autorService.getAuthorById(id);
+	public String showFormForUpdating(@PathVariable(value = "id") long id, Model model) {
+		Autor autor = autorService.getAuthorById(id);
+//		Autor autor = this.autorService.getAuthorById(id);
+//		List<Autor> autores = autorService.getAllAutores();
 		model.addAttribute("autor", autor);
-
+//		model.addAttribute("authors", autores);
 		return "/author/update";
+	}
+
+	@PostMapping("/author/save_updated")
+	public String saveUpdatedAuthor(@ModelAttribute("autor") Autor autor) {
+		autorService.saveAutor(autor);
+		return "redirect:/author/list";
 	}
 
 	@GetMapping("/author/add")

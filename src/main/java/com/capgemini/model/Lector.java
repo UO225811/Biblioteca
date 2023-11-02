@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -41,7 +42,7 @@ public class Lector {
 	@Transient
 	private String passwordConfirm;
 
-	@JsonBackReference
+	@JsonManagedReference
 	@OneToMany(mappedBy = "lector", targetEntity = Prestamo.class, cascade = CascadeType.ALL)
 	private Set<Prestamo> prestamos;
 

@@ -2,6 +2,7 @@ package com.capgemini.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
@@ -28,12 +29,12 @@ public class Prestamo {
 	@Column
 	private LocalDate fin;
 
-	@JsonManagedReference
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_lector")
 	private Lector lector;
 
-	@JsonManagedReference
+	@JsonBackReference
 	@OneToOne
 	@JoinColumn(name = "fk_copia")
 	private Copia copia;

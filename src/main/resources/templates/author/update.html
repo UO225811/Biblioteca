@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>Actualizar libro</title>
-</head>
+
+<head th:replace="~{fragments/head}" />
+
 <body>
-<p>hola</p>
+	<nav th:replace="~{fragments/nav}" />
+	<form action="#" th:action="@{/author/save_updated}" th:object="${autor}" method="post">
+		<input type="hidden" th:field="*{id}">
+		<input th:field="*{nombre}" type="text" placeholder="Nombre del autor" class="form-control mb-4 col-4" required>
+		<input th:field="*{nacionalidad}" type="text" placeholder="Nacionalidad del autor" required
+			class="form-control mb-4 col-4">
+		<input th:field="*{fechaNacimiento}" type="date" class="form-control mb-4 col-4" required>
+		<button type="submit" class="btn btn-info col-2">Actualizar autor</button>
+	</form>
+	<hr>
+	<a th:href="@{/author/list}">Volver</a>
+	<footer th:replace="~{fragments/footer}" />
 </body>
+
 </html>

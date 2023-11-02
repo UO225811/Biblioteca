@@ -57,6 +57,11 @@ public class AutorServiceImpl implements AutorService {
 		List<Autor> autores = getAllAutores();
 		
 		return new PageImpl<Autor>(autores, pageable, autores.size());
+	}
+
+	@Override
+	public void updateAutor(Autor autor) {
+		autorRepository.save(autor);
 	} 
 
 }

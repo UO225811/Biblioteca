@@ -26,8 +26,8 @@ public class AutorRestServiceImpl implements AutorRestService {
 	}
 
 	@Override
-	public void saveAutor(Autor l) {
-		repo.save(l);
+	public Autor saveAutor(Autor l) {
+		return repo.save(l);
 	}
 
 	@Override

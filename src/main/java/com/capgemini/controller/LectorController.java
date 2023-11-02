@@ -32,7 +32,7 @@ public class LectorController {
 
 	@PostMapping("/signup")
 	public String signup(Lector lector) {
-		lector.setRole(rolesService.getRoles()[0]);
+		lector.setRole(rolesService.getRoles()[1]);
 		lectorService.saveLector(lector);
 //        securityService.autoLogin(lector.getEmail(), lector.getPassword());
 		return "redirect:login";

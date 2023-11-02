@@ -16,6 +16,8 @@ public interface AutorService {
 
 	void deleteAutorById(long id);
 	
+	void updateAutor(Autor autor);
+	
 	Page<Autor> findPaginated(int pageNum, int pageSize, String sortField, String sortOrder);
 
 }

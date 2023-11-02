@@ -12,7 +12,7 @@ public interface AutorRestService {
 
 	List<Autor> getAllAutores();
 
-	void saveAutor(Autor l);
+	Autor saveAutor(Autor l);
 
 	void deleteAutorById(long id);
 	
