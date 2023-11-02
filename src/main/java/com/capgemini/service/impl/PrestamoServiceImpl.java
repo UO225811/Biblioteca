@@ -1,5 +1,8 @@
 package com.capgemini.service.impl;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,4 +25,26 @@ public class PrestamoServiceImpl implements PrestamoService{
 		prestamoRepository.save(p);		
 	}
 
+	@Override
+	public void deletePrestamo(Prestamo p) {
+		prestamoRepository.delete(p);		
+	}
+
+	@Override
+	public Prestamo getPrestamoById(long id) {
+		Optional<Prestamo> opt = prestamoRepository.findById(id);
+		Prestamo prestamo = null;
+		if (opt.isPresent())
+			prestamo = opt.get();
+		else
+			throw new RuntimeException("Prestamo with id " + id + " not found");
+		return prestamo;
+	}
+
+	@Override
+	public List<Prestamo> getPrestamosByLectorId(long id) {
+		return prestamoRepository.getPrestamosByLectorId(id);
+	}
+
+	
 }

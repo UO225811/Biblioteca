@@ -19,6 +19,8 @@ public interface CopiaService {
 	
 	List<Copia> findCopiasByLibroId(long libroId);
 	
+	List<Copia> findCopiasDisponiblesByLibroId(long libroId);
+	
 	// Objeto página
 	Page<Copia> findPaginated(long libroId, int pageNum, int pageSize, String sortField, String sortOrder);
 

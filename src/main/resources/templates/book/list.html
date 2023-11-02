@@ -56,7 +56,7 @@
 									copias</a>
 								<a th:href="@{'/delete/' + ${book.id}}" class="btn btn-danger">Eliminar</a>
 							</div>
-							<div sec:authorize="hasRole('LECTOR')" th:if="${book.ncopiasDisponibles} > 0">
+							<div sec:authorize="hasRole('LECTOR')" th:if="${book.ncopiasDisponibles} > 0 and !${maxPrestamos}">
 								<a th:href="@{'/book/' + ${book.id} + '/lease'}" class="btn btn-primary">Solicitar</a>
 								</a>
 							</div>

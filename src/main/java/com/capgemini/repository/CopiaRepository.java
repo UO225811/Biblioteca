@@ -15,5 +15,8 @@ public interface CopiaRepository extends JpaRepository<Copia, Long> {
 
 	@Query(value= "SELECT * FROM copias WHERE fk_libro= :libroid", nativeQuery = true)
 	List<Copia> findCopiasByLibroId(@Param("libroid") long libroId);
+	
+	@Query(value= "SELECT * FROM copias WHERE fk_libro= :libroid AND estado = 2", nativeQuery = true)
+	List<Copia> findCopiasDisponiblesByLibroId(@Param("libroid") long libroId);
 
 }

@@ -69,4 +69,9 @@ public class CopiaServiceImpl implements CopiaService{
 		return new PageImpl<Copia>(copias, pageable, copias.size());
 	}
 
+	@Override
+	public List<Copia> findCopiasDisponiblesByLibroId(long libroId) {
+		return copiaRepository.findCopiasDisponiblesByLibroId(libroId);
+	}
+
 }

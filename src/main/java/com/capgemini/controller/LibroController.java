@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,9 @@ import com.capgemini.model.Libro;
 import com.capgemini.model.enums.EstadoCopia;
 import com.capgemini.service.AutorService;
 import com.capgemini.service.CopiaService;
+import com.capgemini.service.LectorService;
 import com.capgemini.service.LibroService;
+import com.capgemini.service.PrestamoService;
 
 @Controller
 public class LibroController {
@@ -29,7 +32,10 @@ public class LibroController {
 	private AutorService autorService;
 	@Autowired
 	private CopiaService copiaService;
-
+	@Autowired
+	private PrestamoService prestamoService;
+	@Autowired
+	private LectorService lectorService;
 
 	@GetMapping("/")
 	public String viewHomePage(Model model) {
@@ -116,6 +122,12 @@ public class LibroController {
 		model.addAttribute("totalItems", page.getTotalElements());
 		model.addAttribute("reverseSortDir", sortOrder.equalsIgnoreCase("asc") ? "desc" : "asc");
 
+		if(SecurityContextHolder.getContext().getAuthentication().getAuthorities()
+				.stream().anyMatch(a -> a.getAuthority().equals("LECTOR"))) {
+			long lectorId = lectorService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).getnSocio();
+			model.addAttribute("maxPrestamos", prestamoService.getNumPrestamos(lectorId)>=3);
+		}
+		
 		return "/book/list";
 	}
 	
