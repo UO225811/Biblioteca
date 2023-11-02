@@ -46,5 +46,10 @@ public class PrestamoServiceImpl implements PrestamoService{
 		return prestamoRepository.getPrestamosByLectorId(id);
 	}
 
+	@Override
+	public List<Prestamo> getPrestamosAtrasados() {
+		return prestamoRepository.getPrestamosAtrasados();
+	}
+
 	
 }

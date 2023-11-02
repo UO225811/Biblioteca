@@ -16,4 +16,7 @@ public interface PrestamoRepository extends JpaRepository<Prestamo, Long>{
 	@Query(value= "SELECT * from prestamos where fk_lector= :lectorid", nativeQuery = true)
 	List<Prestamo> getPrestamosByLectorId(@Param("lectorid") long lectorId);
 
+	@Query(value= "SELECT * from prestamos where fin < NOW()", nativeQuery = true)
+	List<Prestamo> getPrestamosAtrasados();
+
 }

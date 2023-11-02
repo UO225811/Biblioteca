@@ -14,4 +14,6 @@ public interface PrestamoService {
 	public Prestamo getPrestamoById(long id);
 	
 	public List<Prestamo> getPrestamosByLectorId(long id);
+	
+	public List<Prestamo> getPrestamosAtrasados();
 }

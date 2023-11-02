@@ -16,6 +16,7 @@ import com.capgemini.model.enums.EstadoCopia;
 import com.capgemini.service.CopiaService;
 import com.capgemini.service.LectorService;
 import com.capgemini.service.LibroService;
+import com.capgemini.service.MultaService;
 import com.capgemini.service.PrestamoService;
 
 @Controller
@@ -29,6 +30,8 @@ public class PrestamoController {
 	private LectorService lectorService;
 	@Autowired
 	private CopiaService copiaService;
+	@Autowired
+	private MultaService multaService;
 
 	@GetMapping("/leases")
 	public String showLeases(Model model) {
@@ -62,7 +65,8 @@ public class PrestamoController {
 	public String returnBook(@PathVariable(value = "id") long id) {
 		Prestamo p = prestamoService.getPrestamoById(id);
 		if(LocalDate.now().isAfter(p.getFin())) {
-			//multar
+			multaService.multar(p.getFin(), 
+					lectorService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()));
 		}
 		p.getCopia().setEstado(EstadoCopia.BIBLIOTECA);
 		prestamoService.deletePrestamo(p);
