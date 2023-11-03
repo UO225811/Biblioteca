@@ -3,7 +3,6 @@ package com.capgemini.model;
 import java.time.LocalDate;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -12,9 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
@@ -38,6 +35,9 @@ public class Lector {
 	private String role;
 
 	private String password;
+	
+	@Transient
+	private boolean isMultado;
 
 	@Transient
 	private String passwordConfirm;
@@ -46,9 +46,8 @@ public class Lector {
 	@OneToMany(mappedBy = "lector", targetEntity = Prestamo.class, cascade = CascadeType.ALL)
 	private Set<Prestamo> prestamos;
 
-	@OneToOne(optional = true)
-	@JoinColumn(name = "multa")
-	private Multa multa;
+	@OneToMany(mappedBy = "lector", targetEntity = Multa.class, cascade = CascadeType.ALL)
+	private Set<Multa> multas;
 
 	public boolean devolver(Long id, LocalDate fechaAct) {
 		// precondition --> prestamos.notEmpty()
@@ -104,14 +103,6 @@ public class Lector {
 		this.prestamos = prestamos;
 	}
 
-	public Multa getMulta() {
-		return multa;
-	}
-
-	public void setMulta(Multa multa) {
-		this.multa = multa;
-	}
-
 	public String getRole() {
 		return role;
 	}
@@ -142,6 +133,26 @@ public class Lector {
 
 	public void setPasswordConfirm(String passwordConfirm) {
 		this.passwordConfirm = passwordConfirm;
+	}
+
+	public Set<Multa> getMultas() {
+		return multas;
+	}
+
+	public void setMultas(Set<Multa> multas) {
+		this.multas = multas;
+	}
+	
+	public void addMulta(Multa m) {
+		multas.add(m);
+	}
+
+	public boolean isMultado() {
+		return isMultado;
+	}
+
+	public void setMultado(boolean isMultado) {
+		this.isMultado = isMultado;
 	}
 
 }

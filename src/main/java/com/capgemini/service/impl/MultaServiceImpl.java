@@ -3,6 +3,7 @@ package com.capgemini.service.impl;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,23 +25,32 @@ public class MultaServiceImpl implements MultaService {
 	@Override
 	public void multar(LocalDate finPrestamo, Lector l) {
 		// calcular dias de multa
-		long multa = ChronoUnit.DAYS.between(finPrestamo, LocalDate.now()) * 2;
-		// ver si ya hay una multa
-		Multa m = null;
+		long diasMulta = ChronoUnit.DAYS.between(finPrestamo, LocalDate.now()) * 2;
+
+		l.setMultado(true);
+		
 		// si hay, sumar los dias (actualizar)
-		if (l.getMulta() != null) {
-			m = l.getMulta();
-			m.setfFin(m.getfFin().plusDays(multa));
+		Set<Multa> multas = l.getMultas();
+		boolean isMultado = false;
+		for (Multa m : multas) {
+			if (m.getfFin().isAfter(LocalDate.now())) {
+				m.setfFin(m.getfFin().plusDays(diasMulta));
+				isMultado = true;
+				multaRepository.save(m);
+			}
 		}
-		// else: crear ulta con duracion
-		else {
-			m = new Multa();
-			m.setfInicio(LocalDate.now());
-			m.setfFin(LocalDate.now().plusDays(multa));
+
+		if (!isMultado) {
+			Multa multa = new Multa();
+			multa.setfInicio(LocalDate.now());
+			multa.setfFin(LocalDate.now().plusDays(diasMulta));
+			multa.setLector(l);
+
+			l.addMulta(multa);
+			multaRepository.save(multa);
 		}
-		l.setMulta(m);
-		multaRepository.save(m);
-		lectorRepository.save(l);
+		
+//		lectorRepository.save(l);
 	}
 
 	@Override
@@ -50,8 +60,7 @@ public class MultaServiceImpl implements MultaService {
 
 	@Override
 	public void deleteMultaByLectorId(long id) {
-
-		multaRepository.deleteByLectorId(id);
+		multaRepository.deleteById(id);
 	}
 
 	@Override

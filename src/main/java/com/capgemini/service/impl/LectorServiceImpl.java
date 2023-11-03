@@ -53,4 +53,9 @@ public class LectorServiceImpl implements LectorService {
 		return lector;
 	}
 
+	@Override
+	public List<Lector> findAll() {
+		return lectorRepository.findAll();
+	}
+
 }

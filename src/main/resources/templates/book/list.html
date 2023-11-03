@@ -42,12 +42,12 @@
 						<td th:text="${book.autor.nombre}"></td>
 						<td th:text="${book.editorial}"></td>
 						<td th:text="${book.anyo}"></td>
-							<div sec:authorize="hasRole('ADMIN')" >
-								<td th:text="${book.ncopias}">
-							</div>
-							<div sec:authorize="hasRole('LECTOR')" >
-								<td th:text="${book.ncopiasDisponibles}">
-							</div>
+						<div sec:authorize="hasRole('ADMIN')">
+							<td th:text="${book.ncopias}">
+						</div>
+						<div sec:authorize="hasRole('LECTOR')">
+							<td th:text="${book.ncopiasDisponibles}">
+						</div>
 						</td>
 						<td>
 							<div sec:authorize="hasRole('ADMIN')">
@@ -58,7 +58,12 @@
 							</div>
 							<div sec:authorize="hasRole('LECTOR')" th:if="${book.ncopiasDisponibles} > 0">
 								<div th:if="${maxPrestamos}">
-									<a th:href="@{'/book/' + ${book.id} + '/lease'}" class="btn btn-primary">Solicitar</a>
+									<div th:if="${!isMultado}">
+									<a th:href="@{'/book/' + ${book.id} + '/lease'}"
+										class="btn btn-primary">Solicitar</a>
+								</div>
+								<div th:if="${isMultado}">
+									<span>Multado</span>
 								</div>
 							</div>
 						</td>

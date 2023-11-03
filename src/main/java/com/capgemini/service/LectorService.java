@@ -16,4 +16,6 @@ public interface LectorService {
 	
 	Lector findByEmail(String email);
 	
+	public List<Lector> findAll();
+	
 }

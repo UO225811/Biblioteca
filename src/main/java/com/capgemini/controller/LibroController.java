@@ -1,6 +1,8 @@
 package com.capgemini.controller;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.capgemini.model.Autor;
 import com.capgemini.model.Copia;
+import com.capgemini.model.Lector;
 import com.capgemini.model.Libro;
+import com.capgemini.model.Multa;
 import com.capgemini.model.enums.EstadoCopia;
 import com.capgemini.service.AutorService;
 import com.capgemini.service.CopiaService;
@@ -124,8 +128,21 @@ public class LibroController {
 
 		if(SecurityContextHolder.getContext().getAuthentication().getAuthorities()
 				.stream().anyMatch(a -> a.getAuthority().equals("ROLE_LECTOR"))) {
-			long lectorId = lectorService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).getnSocio();
+			Lector lector = lectorService.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+			long lectorId = lector.getnSocio();
+			
+			boolean isMultado = false;
+			Set<Multa> multas = lector.getMultas();
+			for (Multa m : multas) {
+				if (m.getfFin().isAfter(LocalDate.now())) {
+					isMultado = true;
+					break;
+				}
+			}
+			lector.setMultado(isMultado);
+			
 			model.addAttribute("maxPrestamos", prestamoService.getNumPrestamos(lectorId)<3);
+			model.addAttribute("isMultado", lector.isMultado());
 		}
 		
 		return "/book/list";
